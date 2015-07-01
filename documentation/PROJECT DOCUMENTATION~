@@ -1,0 +1,91 @@
+                                           MINI MICROPROCESSOR WITHOUT INTERLOCKED PIPELINING STAGES (mmMIPS)
+		 
+						              PROJECT DOCUMENTATION
+
+PROJECT SUPERVISOR/MENTOR : KUMAR SAMBHAV PANDEY
+
+PROJECT TEAM :
+		1. SAHIL BADYAL (12537)
+		2. GAURAV PAREEK (12560)
+
+PROJECT DEVELOPMENT STAGES :
+	
+	STAGE 1 : From 3rd April - 10th April
+
+		CHANGES TO THE mini MIPS :
+			
+			CHANGE 1 : Adding J-type instruction format into the single cycle mini MIPS
+			
+			CHANGE 2 : Adding the following instructions :
+				  
+					1. jump 
+					2. jump and link
+					3. jump return
+
+	STAGE 2 : From 11th April -  23rd April
+			
+		CHANGES TO THE mini MIPS
+
+			CHANGE : Converting Single Cycle MIPS  to Multi Cycle MIPS with jump
+
+	STAGE 3 : From 23th April - 3 May
+
+		DEBUGGING and TESTING THE Multicycle MIPS 
+
+PROJECT SYNOPSIS :
+
+1. ADDING J-type instruction to mmMIPS
+	
+	Changes :
+		1. To mips.h
+		2. Ctrl.cpp and ctrl.h
+		
+	
+2. ADDING JUMP instruction 
+		
+		New modules added :
+		
+		1. Shiftleft (jump special 28 << 26)
+		2. Multiplexer
+		3. Appender (PC[31-28],shift[28])
+
+3. ADDING JUMP AND LINK
+		
+		New modules added :
+		
+		1. Converted MUX2_1 <Awordreg> to Multiplexer 4_1 ( has 31 on 0x2 select  line )
+		2. Changed the ctrl.cpp
+		3. Added one Mux6 (PC+4 or Mux 3)
+
+4. Adding JUMP Return
+		
+		1.Added a Mux7 (alu result or add2 )
+		2. Changed aluctrl.cpp
+
+					
+5. CONVERTING SINGLE CYCLE MIPS TO MULTI CYCLE MIPS
+
+		CHANGES
+	
+	1. COMBINATIONAL CONTROL LOGIC used in Ctrl unit
+	2. Two 4_1Mux used
+	3. New registers added A,B,MEMDR,ALUOUT
+	4. Connections as per diagram 5.28 of Patterson & Hennessy
+	
+
+6. DEBUGGING THE MULTICYCLE MIPS
+		
+	Bugs found 
+	
+	1. IorD was not linked to Mux1 due a mistake of mismatch of signal - FIXED By Akarshit Wal
+	2. Synchronization problem between PC and Mem due to difference in the position of wait() signal - Fixed by Sahil Badyal
+	3. New registers were not ahead of others by one clock cycle - Fixed 
+	4. CLOCK SKEW DETECTED - NOT FIXED
+
+7. TESTING MIPS
+
+	1. Tested ok for load and store
+	2. Tested ok for jump
+	3. tested ok for R type and branch instruction
+
+
